@@ -1,20 +1,38 @@
 #include "CTriangleDecorator.h"
 
-CTriangleDecorator::CTriangleDecorator(const float y1, const float x1, const float y2, const float x2, const float y3, const float x3)
+CTriangleDecorator::CTriangleDecorator(const sf::Vector2f p1, const sf::Vector2f p2, const sf::Vector2f p3, const sf::Color color)
 {
+	const auto a = GetDistance(p1, p2);
+	const auto b = GetDistance(p1, p3);
+	const auto c = GetDistance(p2, p3);
+	if (!(a < b + c && b < a + c && c < a + b))
+	{
+		throw std::logic_error("triangle: the sum of any two sides of a triangle must be greater than the third side");
+	}
+
 	sf::ConvexShape shape;
 	shape.setPointCount(3);
-	shape.setPoint(0, sf::Vector2(y1, x1));
-	shape.setPoint(1, sf::Vector2(y2, x2));
-	shape.setPoint(2, sf::Vector2(y3, x3));
-	shape.setFillColor(sf::Color(76, 140, 255));
+	shape.setPoint(0, p1);
+	shape.setPoint(1, p2);
+	shape.setPoint(2, p3);
+	shape.setFillColor(color);
 
 	m_shape = std::make_shared<sf::ConvexShape>(shape);
 }
 
-std::string CTriangleDecorator::ToString() const
+float CTriangleDecorator::side1() const
 {
-	return "CTriangleDecorator ToString";
+	return this->GetDistance(m_shape->getPoint(0), m_shape->getPoint(1));
+}
+
+float CTriangleDecorator::side2() const
+{
+	return this->GetDistance(m_shape->getPoint(0), m_shape->getPoint(2));
+}
+
+float CTriangleDecorator::side3() const
+{
+	return this->GetDistance(m_shape->getPoint(1), m_shape->getPoint(2));
 }
 
 std::shared_ptr<sf::Shape> CTriangleDecorator::GetShapeInstance() const
@@ -22,12 +40,28 @@ std::shared_ptr<sf::Shape> CTriangleDecorator::GetShapeInstance() const
 	return m_shape;
 }
 
-float CTriangleDecorator::Perimeter() const
+sf::Color CTriangleDecorator::GetFillColor() const
 {
-	return 0.0f;
+	return m_shape->getFillColor();
 }
 
-float CTriangleDecorator::Square() const
+void CTriangleDecorator::Accept(IShapeVisitor& visitor) const
 {
-	return 0.0f;
+	visitor.Visit(*this);
+}
+
+float CTriangleDecorator::GetPerimeter() const
+{
+	return side1() + side2() + side3();
+}
+
+float CTriangleDecorator::GetSquare() const
+{
+	const float d = this->GetPerimeter() / 2;
+	return std::sqrt(d * (d - side1()) * (d - side2()) * (d - side3()));
+}
+
+float CTriangleDecorator::GetDistance(const sf::Vector2f p1, const sf::Vector2f p2) const
+{
+	return std::sqrt((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y));
 }

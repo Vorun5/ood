@@ -1,23 +1,24 @@
 #pragma once
-#include "IShapeDecorator.h"
+#include "IShape.h"
 
-class CTriangleDecorator : public IShapeDecorator
+class CTriangleDecorator final : public IShape
 {
 public:
-	CTriangleDecorator(/*std::shared_ptr<sf::CircleShape> shape*/ float y1, float x1, float y2, float x2, float y3, float x3);
-
-
+	CTriangleDecorator(sf::Vector2f p1, sf::Vector2f p2, sf::Vector2f p3, sf::Color color);
 	~CTriangleDecorator() override = default;
 
-	std::string ToString() const override;
+	float side1() const;
+	float side2() const;
+	float side3() const;
+
+	// IShape
+	float GetPerimeter() const override;
+	float GetSquare() const override;
 	std::shared_ptr<sf::Shape> GetShapeInstance() const override;
-
-
-protected:
-	float Perimeter() const override;
-	float Square() const override;
-
+	sf::Color GetFillColor() const override;
+	void Accept(IShapeVisitor& visitor) const override;
 
 private:
 	std::shared_ptr<sf::ConvexShape> m_shape;
+	float GetDistance(sf::Vector2f p1, sf::Vector2f p2) const;
 };

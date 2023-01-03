@@ -1,19 +1,35 @@
 #include "CRectangleDecorator.h"
 
-
-CRectangleDecorator::CRectangleDecorator(const float y1, const float x1, const float y2, const float x2)
+CRectangleDecorator::CRectangleDecorator(const sf::Vector2f p1, const sf::Vector2f p2, const sf::Color color)
 {
+	if (p1.x == p2.x && p1.y == p2.y)
+	{
+		throw std::logic_error("rectangle: top-left and bottom-right coordinates cannot be the same");
+	}
 	sf::RectangleShape shape;
-	shape.setPosition(sf::Vector2(y1, x1));
-	shape.setSize(sf::Vector2f(x2 - x1, y2 - y1));
-	shape.setFillColor(sf::Color(255, 92, 3));
+	if (p1.x > p2.x) 
+	{
+		shape.setPosition(p2);
+		shape.setSize(sf::Vector2f(p1.x - p2.x, p1.y - p2.y));
+	}
+	else 
+	{
+		shape.setPosition(p1);
+		shape.setSize(sf::Vector2f(p2.x - p1.x, p2.y - p1.y));
+	}
+	shape.setFillColor(color);
 
 	m_shape = std::make_shared<sf::RectangleShape>(shape);
 }
 
-std::string CRectangleDecorator::ToString() const
+float CRectangleDecorator::GetWidth() const
 {
-	return "CRectangleDecorator ToString";
+	return m_shape->getSize().x;
+}
+
+float CRectangleDecorator::GetHeight() const
+{
+	return m_shape->getSize().y;
 }
 
 std::shared_ptr<sf::Shape> CRectangleDecorator::GetShapeInstance() const
@@ -21,12 +37,22 @@ std::shared_ptr<sf::Shape> CRectangleDecorator::GetShapeInstance() const
 	return m_shape;
 }
 
-float CRectangleDecorator::Perimeter() const
+sf::Color CRectangleDecorator::GetFillColor() const
 {
-	return 0.0f;
+	return m_shape->getFillColor();
 }
 
-float CRectangleDecorator::Square() const
+void CRectangleDecorator::Accept(IShapeVisitor& visitor) const
 {
-	return 0.0f;
+	visitor.Visit(*this);
+}
+
+float CRectangleDecorator::GetPerimeter() const
+{
+	return 2 * std::abs(this->GetHeight()) + 2 * std::abs(this->GetWidth());
+}
+
+float CRectangleDecorator::GetSquare() const
+{
+	return std::abs(this->GetHeight()) * std::abs(this->GetWidth());
 }

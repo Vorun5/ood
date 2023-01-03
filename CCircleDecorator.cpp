@@ -1,17 +1,32 @@
+#define _USE_MATH_DEFINES
 #include "CCircleDecorator.h"
 
-CCircleDecorator::CCircleDecorator(const float radius, const float y, const float x)
+CCircleDecorator::CCircleDecorator(const float radius, const sf::Vector2f center, const sf::Color color)
 {
+	if (!(radius > 0))
+	{
+		throw std::logic_error("circle: radius cannot be negative or zero");
+	}
 	sf::CircleShape shape(radius);
-	shape.setPosition(y, x);
-	shape.setFillColor(sf::Color(143, 0, 255));
+	shape.setPosition(center.x, center.y);
+	shape.setFillColor(color);
 
 	m_shape = std::make_shared<sf::CircleShape>(shape);
 }
 
-std::string CCircleDecorator::ToString() const
+float CCircleDecorator::GetRadius() const
 {
-	return "CCircleDecorator ToString";
+	return m_shape->getRadius();
+}
+
+sf::Vector2f CCircleDecorator::GetCenter() const
+{
+	auto position = m_shape->getPosition();
+	const auto radius = this->GetRadius();
+	position.x += radius / 2;
+	position.y += radius / 2;
+
+	return position;
 }
 
 std::shared_ptr<sf::Shape> CCircleDecorator::GetShapeInstance() const
@@ -19,13 +34,22 @@ std::shared_ptr<sf::Shape> CCircleDecorator::GetShapeInstance() const
 	return m_shape;
 }
 
-
-float CCircleDecorator::Perimeter() const
+sf::Color CCircleDecorator::GetFillColor() const
 {
-	return 0.0f;
+	return m_shape->getFillColor();
 }
 
-float CCircleDecorator::Square() const
+void CCircleDecorator::Accept(IShapeVisitor& visitor) const
 {
-	return 0.0f;
+	visitor.Visit(*this);
+}
+
+float CCircleDecorator::GetPerimeter() const
+{
+	return this->GetRadius() * 2.0f * M_PI;
+}
+
+float CCircleDecorator::GetSquare() const
+{
+	return std::pow(this->GetRadius(), 2) * M_PI;
 }

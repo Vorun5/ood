@@ -1,0 +1,6 @@
+triangle p=472.391 s=5500  RGB(76, 140, 255)
+circle p=314.159 s=7853.98  RGB(255, 93, 2)
+rectangle p=380 s=9000  RGB(143, 0, 255)
+triangle p=856.239 s=35000  RGB(89, 108, 35)
+circle p=314.159 s=7853.98  RGB(250, 216, 242)
+rectangle p=800 s=30000  RGB(223, 162, 104)

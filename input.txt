@@ -1,0 +1,7 @@
+triangle 30 30 200 0 0 100 #4C8CFF
+circle 200 100 50 #FF5D02
+rectangle 10 110 100 10 #8F00FF
+triangle 300 300 100 100 400 50 #596c23
+circle -50 -50 50 #fad8f2
+rectangle 1000 800 700 700 #dfa268
+end

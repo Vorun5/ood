@@ -8,5 +8,16 @@
   C:\Users\user\Desktop\ood\resources\ball.wav
   C:\Users\user\Desktop\ood\resources\sansation.ttf
   Скопировано файлов:         2.
+  CCircleCreator.cpp
+  CCircleDecorator.cpp
+C:\Users\user\Desktop\ood\CCircleDecorator.cpp(49,34): warning C4244: return: преобразование "double" в "float", возможна потеря данных
+C:\Users\user\Desktop\ood\CCircleDecorator.cpp(54,40): warning C4244: return: преобразование "double" в "float", возможна потеря данных
+  CRectangleCreator.cpp
+  CRectangleDecorator.cpp
+  CShapePrinter.cpp
+  CShapesController.cpp
+  CTriangleCreator.cpp
+  CTriangleDecorator.cpp
   main.cpp
+  Создание кода...
   ood.vcxproj -> C:\Users\user\Desktop\ood\x64\Debug Dynamic\ood.exe

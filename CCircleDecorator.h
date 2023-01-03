@@ -1,24 +1,22 @@
 #pragma once
-#include "IShapeDecorator.h"
+#include "IShape.h"
 
-class CCircleDecorator : public IShapeDecorator
+class CCircleDecorator final : public IShape
 {
 public:
-	CCircleDecorator(/*std::shared_ptr<sf::CircleShape> shape*/float radius, float y, float x);
-	
-
+	CCircleDecorator(float radius, sf::Vector2f center, sf::Color color);
 	~CCircleDecorator() override = default;
 
-	std::string ToString() const override;
+	float GetRadius() const;
+	sf::Vector2f GetCenter() const;
+
+	// IShape
+	float GetPerimeter() const override;
+	float GetSquare() const override;
 	std::shared_ptr<sf::Shape> GetShapeInstance() const override;
-
-
-protected:
-	float Perimeter() const override;
-	float Square() const override;
-
+	sf::Color GetFillColor() const override;
+	void Accept(IShapeVisitor& visitor) const override;
 
 private:
 	std::shared_ptr<sf::CircleShape> m_shape;
 };
-

@@ -368,8 +368,13 @@ copy /Y "$(SolutionDir)resources"  "$(TargetDir)resources\"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CCircleCreator.cpp" />
     <ClCompile Include="CCircleDecorator.cpp" />
+    <ClCompile Include="CRectangleCreator.cpp" />
     <ClCompile Include="CRectangleDecorator.cpp" />
+    <ClCompile Include="CShapePrinter.cpp" />
+    <ClCompile Include="CShapesController.cpp" />
+    <ClCompile Include="CTriangleCreator.cpp" />
     <ClCompile Include="CTriangleDecorator.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -489,8 +494,14 @@ copy /Y "$(SolutionDir)resources"  "$(TargetDir)resources\"</Command>
     <Library Include="extlibs\lib\x86\vorbisfile.lib" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CCircleCreator.h" />
     <ClInclude Include="CCircleDecorator.h" />
+    <ClInclude Include="CColorUtil.h" />
+    <ClInclude Include="CRectangleCreator.h" />
     <ClInclude Include="CRectangleDecorator.h" />
+    <ClInclude Include="CShapePrinter.h" />
+    <ClInclude Include="CShapesController.h" />
+    <ClInclude Include="CTriangleCreator.h" />
     <ClInclude Include="CTriangleDecorator.h" />
     <ClInclude Include="extlibs\include\SFML\Audio.hpp" />
     <ClInclude Include="extlibs\include\SFML\Audio\AlResource.hpp" />
@@ -590,13 +601,19 @@ copy /Y "$(SolutionDir)resources"  "$(TargetDir)resources\"</Command>
     <ClInclude Include="extlibs\include\SFML\Window\Window.hpp" />
     <ClInclude Include="extlibs\include\SFML\Window\WindowHandle.hpp" />
     <ClInclude Include="extlibs\include\SFML\Window\WindowStyle.hpp" />
-    <ClInclude Include="IShapeDecorator.h" />
+    <ClInclude Include="IShape.h" />
+    <ClInclude Include="IShapeCreator.h" />
+    <ClInclude Include="IShapeVisitor.h" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="resources\ball.wav" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="resources\sansation.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="input.txt" />
+    <Text Include="output.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
