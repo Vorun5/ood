@@ -13,4 +13,4 @@
     3. Одиночка - https://refactoring.guru/ru/design-patterns/singleton/cpp/example
         Лекция Малова - https://www.youtube.com/watch?v=AkghRswQK_I
     4. Посетитель - https://refactoring.guru/ru/design-patterns/visitor/cpp/example
-        Лекция Малова - https://www.youtube.com/watch?v=zGgvL12jZN4
+        Лекция Малова - https://www.youtube.com/watch?v=U8Jvy4uPp64
