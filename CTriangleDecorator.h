@@ -4,12 +4,13 @@
 class CTriangleDecorator final : public IShape
 {
 public:
-	CTriangleDecorator(sf::Vector2f p1, sf::Vector2f p2, sf::Vector2f p3, sf::Color color);
+	CTriangleDecorator(std::shared_ptr<sf::ConvexShape>);
 	~CTriangleDecorator() override = default;
 
 	float side1() const;
 	float side2() const;
 	float side3() const;
+	static std::shared_ptr<sf::ConvexShape> CreateConvexShape(sf::Vector2f p1, sf::Vector2f p2, sf::Vector2f p3, sf::Color color);
 
 	// IShape
 	float GetPerimeter() const override;
@@ -20,5 +21,5 @@ public:
 
 private:
 	std::shared_ptr<sf::ConvexShape> m_shape;
-	float GetDistance(sf::Vector2f p1, sf::Vector2f p2) const;
+	static float GetDistance(sf::Vector2f p1, sf::Vector2f p2);
 };

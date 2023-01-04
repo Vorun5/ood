@@ -4,11 +4,12 @@
 class CCircleDecorator final : public IShape
 {
 public:
-	CCircleDecorator(float radius, sf::Vector2f center, sf::Color color);
+	CCircleDecorator(std::shared_ptr<sf::CircleShape>);
 	~CCircleDecorator() override = default;
 
 	float GetRadius() const;
 	sf::Vector2f GetCenter() const;
+	static  std::shared_ptr<sf::CircleShape> CreateCircleShape(float radius, sf::Vector2f center, sf::Color color);
 
 	// IShape
 	float GetPerimeter() const override;

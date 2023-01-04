@@ -1,25 +1,8 @@
 #include "CRectangleDecorator.h"
 
-CRectangleDecorator::CRectangleDecorator(const sf::Vector2f p1, const sf::Vector2f p2, const sf::Color color)
+CRectangleDecorator::CRectangleDecorator(const std::shared_ptr<sf::RectangleShape> shape)
+	:m_shape(shape)
 {
-	if (p1.x == p2.x && p1.y == p2.y)
-	{
-		throw std::logic_error("rectangle: top-left and bottom-right coordinates cannot be the same");
-	}
-	sf::RectangleShape shape;
-	if (p1.x > p2.x) 
-	{
-		shape.setPosition(p2);
-		shape.setSize(sf::Vector2f(p1.x - p2.x, p1.y - p2.y));
-	}
-	else 
-	{
-		shape.setPosition(p1);
-		shape.setSize(sf::Vector2f(p2.x - p1.x, p2.y - p1.y));
-	}
-	shape.setFillColor(color);
-
-	m_shape = std::make_shared<sf::RectangleShape>(shape);
 }
 
 float CRectangleDecorator::GetWidth() const
@@ -30,6 +13,28 @@ float CRectangleDecorator::GetWidth() const
 float CRectangleDecorator::GetHeight() const
 {
 	return m_shape->getSize().y;
+}
+
+std::shared_ptr<sf::RectangleShape> CRectangleDecorator::CreateRectangleShape(const sf::Vector2f p1, const sf::Vector2f p2, const sf::Color color)
+{
+	if (p1.x == p2.x && p1.y == p2.y)
+	{
+		throw std::logic_error("rectangle: top-left and bottom-right coordinates cannot be the same");
+	}
+	sf::RectangleShape shape;
+	if (p1.x > p2.x)
+	{
+		shape.setPosition(p2);
+		shape.setSize(sf::Vector2f(p1.x - p2.x, p1.y - p2.y));
+	}
+	else
+	{
+		shape.setPosition(p1);
+		shape.setSize(sf::Vector2f(p2.x - p1.x, p2.y - p1.y));
+	}
+	shape.setFillColor(color);
+
+	return std::make_shared<sf::RectangleShape>(shape);
 }
 
 std::shared_ptr<sf::Shape> CRectangleDecorator::GetShapeInstance() const

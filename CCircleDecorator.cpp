@@ -1,17 +1,9 @@
 #define _USE_MATH_DEFINES
 #include "CCircleDecorator.h"
 
-CCircleDecorator::CCircleDecorator(const float radius, const sf::Vector2f center, const sf::Color color)
+CCircleDecorator::CCircleDecorator(const std::shared_ptr<sf::CircleShape> shape)
+	:m_shape(shape)
 {
-	if (!(radius > 0))
-	{
-		throw std::logic_error("circle: radius cannot be negative or zero");
-	}
-	sf::CircleShape shape(radius);
-	shape.setPosition(center.x, center.y);
-	shape.setFillColor(color);
-
-	m_shape = std::make_shared<sf::CircleShape>(shape);
 }
 
 float CCircleDecorator::GetRadius() const
@@ -27,6 +19,19 @@ sf::Vector2f CCircleDecorator::GetCenter() const
 	position.y += radius / 2;
 
 	return position;
+}
+
+std::shared_ptr<sf::CircleShape> CCircleDecorator::CreateCircleShape(const float radius, const sf::Vector2f center, const sf::Color color)
+{
+	if (!(radius > 0))
+	{
+		throw std::logic_error("circle: radius cannot be negative or zero");
+	}
+	sf::CircleShape shape(radius);
+	shape.setPosition(center.x, center.y);
+	shape.setFillColor(color);
+
+	return  std::make_shared<sf::CircleShape>(shape);
 }
 
 std::shared_ptr<sf::Shape> CCircleDecorator::GetShapeInstance() const

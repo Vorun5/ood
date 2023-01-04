@@ -4,11 +4,12 @@
 class CRectangleDecorator : public IShape
 {
 public:
-	CRectangleDecorator(sf::Vector2f p1, sf::Vector2f p2, sf::Color color);
+	CRectangleDecorator(std::shared_ptr<sf::RectangleShape>);
 	~CRectangleDecorator() override = default;
 
 	float GetWidth() const;
 	float GetHeight() const;
+	static std::shared_ptr<sf::RectangleShape> CreateRectangleShape(sf::Vector2f p1, sf::Vector2f p2, sf::Color color);
 
 	// IShape
 	float GetPerimeter() const override;
