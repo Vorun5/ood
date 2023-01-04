@@ -6,15 +6,8 @@ class CTriangleCreator final : public IShapeCreator
 public:
 	CTriangleCreator(CTriangleCreator&) = delete;
 	void operator=(const CTriangleCreator&) = delete;
-	static CTriangleCreator* GetInstance()
-	{
-		if (!m_self)
-		{
-			m_self = new CTriangleCreator();
-		}
-		return m_self;
-	}
-
+	static CTriangleCreator* GetInstance();
+	
 	// IShapeCreator
 	std::shared_ptr<IShape> FactoryMethod(std::string&) const override;
 

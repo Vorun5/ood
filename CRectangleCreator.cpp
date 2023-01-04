@@ -3,6 +3,15 @@
 #include "CColorUtil.h"
 #include <sstream>
 
+CRectangleCreator* CRectangleCreator::GetInstance()
+{
+    if (!m_self)
+    {
+        m_self = new CRectangleCreator();
+    }
+    return m_self;
+}
+
 std::shared_ptr<IShape> CRectangleCreator::FactoryMethod(std::string& str) const
 {
     std::istringstream stream(str);

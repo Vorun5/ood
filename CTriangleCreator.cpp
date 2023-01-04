@@ -3,6 +3,15 @@
 #include "CColorUtil.h"
 #include <sstream>
 
+CTriangleCreator* CTriangleCreator::GetInstance()
+{
+    if (!m_self)
+    {
+        m_self = new CTriangleCreator();
+    }
+    return m_self;
+}
+
 std::shared_ptr<IShape> CTriangleCreator::FactoryMethod(std::string& str) const
 {
     std::istringstream stream(str);

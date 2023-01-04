@@ -4,6 +4,15 @@
 
 #include "CColorUtil.h"
 
+CCircleCreator* CCircleCreator::GetInstance()
+{
+    if (!m_self)
+    {
+        m_self = new CCircleCreator();
+    }
+    return m_self;
+}
+
 std::shared_ptr<IShape> CCircleCreator::FactoryMethod(std::string& str) const
 {
     std::istringstream stream(str);

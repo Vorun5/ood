@@ -6,14 +6,7 @@ class CRectangleCreator final : public IShapeCreator
 public:
 	CRectangleCreator(CRectangleCreator&) = delete;
 	void operator=(const CRectangleCreator&) = delete;
-	static CRectangleCreator* GetInstance()
-	{
-		if (!m_self)
-		{
-			m_self = new CRectangleCreator();
-		}
-		return m_self;
-	}
+	static CRectangleCreator* GetInstance();
 
 	// IShapeCreator
 	std::shared_ptr<IShape> FactoryMethod(std::string& str) const override;
