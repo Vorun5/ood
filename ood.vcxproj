@@ -368,6 +368,7 @@ copy /Y "$(SolutionDir)resources"  "$(TargetDir)resources\"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CCanvas.cpp" />
     <ClCompile Include="CCircleCreator.cpp" />
     <ClCompile Include="CCircleDecorator.cpp" />
     <ClCompile Include="CRectangleCreator.cpp" />
@@ -494,6 +495,7 @@ copy /Y "$(SolutionDir)resources"  "$(TargetDir)resources\"</Command>
     <Library Include="extlibs\lib\x86\vorbisfile.lib" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CCanvas.h" />
     <ClInclude Include="CCircleCreator.h" />
     <ClInclude Include="CCircleDecorator.h" />
     <ClInclude Include="CColorUtil.h" />

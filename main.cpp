@@ -4,6 +4,8 @@
 #include <iostream>
 #include <fstream>
 
+#include "CCanvas.h"
+
 int main()
 {
 	std::ifstream inFile("input.txt");
@@ -15,14 +17,16 @@ int main()
 	}
 
 	CShapesController controller(inFile, outFile);
-
 	while (!controller.End())
 	{
 		controller.ReadShape();
 	}
 	controller.PrintShapes();
 
-	
+	CCanvas canvas(1000, 800, sf::Color(255, 255, 255));
+	canvas.DrawShapes(controller.GetShapes());
+	return 0;
+	/*
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 8;
 	sf::RenderWindow window(sf::VideoMode(1000, 800), "ood", sf::Style::Close, settings);
@@ -45,6 +49,7 @@ int main()
 	}
 
 	return 0;
+	*/
 }
 
 /*
